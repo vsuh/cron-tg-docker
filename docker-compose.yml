@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  cron-tg:
+    ports:
+      - "7111:7878"
+    environment:
+      - UUID=appuser
+    volumes:
+      - /opt/cron-reminder/env/.env.prod:/workspaces/cron-tg-docker/.env
+      - /opt/cron-reminder/log:/workspaces/cron-tg-docker/log
+      - /opt/cron-reminder/db:/workspaces/cron-tg-docker/db
+    restart: unless-stopped
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: cron-tg

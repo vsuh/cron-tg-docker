@@ -1,0 +1,12 @@
+# Add directories or file patterns to ignore during indexing (e.g. foo/ or *.csv)
+**/*.log
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.db-journal
+**/*.db-trace
+**/*.db-trace.txt
+**/*.db-trace.txt.gz
+**/*.db-trace.txt.gz.part
+env/.env.prod
+env/.env.dev
