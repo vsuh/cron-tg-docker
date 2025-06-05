@@ -8,7 +8,7 @@
 - Поддержка CRON-выражений для гибкой настройки расписания
 - Отправка уведомлений в различные Telegram чаты
 - Контейнеризация с использованием Docker
-- Сохранение данных в SQLite
+- Сохранение данных в БД SQLite
 - Ротация логов
 
 ## Требования
@@ -16,23 +16,19 @@
 - Docker
 - Docker Compose
 - Telegram Bot Token
-- ID Telegram чата для отправки сообщений
+- CHAT_ID Telegram чата для отправки уведомлений
 
 ## Установка и запуск
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/your-username/cron-tg-docker.git
+   git clone https://github.com/vsuh/cron-tg-docker.git
    cd cron-tg-docker
    ```
 
-2. Создайте файл с переменными окружения:
-   ```bash
-   mkdir -p /opt/cron-reminder/env
-   cp env/.env.example /opt/cron-reminder/env/.env.prod
-   ```
+2. Создайте файл с переменными окружения `.env`
 
-3. Отредактируйте файл `.env.prod`:
+3. Отредактируйте файл `.env`:
    ```env
    TLCR_SECRET_KEY=your-secret-key
    DEBUG=False
@@ -45,9 +41,10 @@
    TLCR_FLASK_PORT=7000
    ```
 
-4. Создайте необходимые директории:
+4. Создайте необходимые директории для базы данных и протоколов. В контейнере программы запускаются от имени пользователя `appuser(5678)`
    ```bash
    mkdir -p /opt/cron-reminder/{log,db}
+   chown -R 5678:5678 /opt/cron-reminder/*
    ```
 
 5. Запустите контейнер:
@@ -59,15 +56,15 @@
 
 - `web_prod.sh` - скрипт запуска веб-сервера (gunicorn)
 - `rund_prod.sh` - скрипт запуска планировщика задач
+- `start.sh` - точка входа контейнера
 - `log/` - директория для логов
 - `db/` - директория с базой данных SQLite
-- `env/` - конфигурационные файлы окружения
+- `.env` - конфигурационный файл
 
 ## Порты и URL
 
-- Веб-интерфейс доступен по адресу: `http://localhost:7111`
-- Внутренний порт gunicorn: 7878
-- Внешний порт: 7111
+- Веб-интерфейс доступен по адресу: `http://localhost:7878`
+- Внутренний порт gunicorn: 7999
 
 ## Логи
 
@@ -92,7 +89,7 @@
 
 Все важные данные хранятся в директориях:
 - `/opt/cron-reminder/db/` - база данных
-- `/opt/cron-reminder/env/` - конфигурация
+- `/opt/cron-reminder/.env` - конфигурация
 - `/opt/cron-reminder/log/` - логи
 
 Для резервного копирования достаточно сохранить эти директории.

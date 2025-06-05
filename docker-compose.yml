@@ -3,7 +3,7 @@ version: "3.8"
 services:
   cron-tg:
     ports:
-      - "7111:7878"
+      - "7878:7999"
     environment:
       - UUID=appuser
     volumes:
