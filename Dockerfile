@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     WORKDIR="/workspaces/cron-tg-docker" \
     TMPARC="/tmp/app.tgz" \
-    TAG="v1.0.9"
+    TAG="v1.0.10
 
 
 
