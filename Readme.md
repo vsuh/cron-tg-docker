@@ -6,7 +6,7 @@
 
 - Веб-интерфейс для управления напоминаниями
 - Поддержка CRON-выражений для гибкой настройки расписания
-- Отправка уведомлений в различные Telegram чаты
+- Отправка уведомлений в различные Telegram чаты (от имени телеграм-бота)
 - Контейнеризация с использованием Docker
 - Сохранение данных в БД SQLite
 - Ротация логов
@@ -29,18 +29,9 @@
 2. Создайте файл с переменными окружения `.env`
 
 3. Отредактируйте файл `.env`:
-   ```env
-   TLCR_SECRET_KEY=your-secret-key
-   DEBUG=False
-   TLCR_TELEGRAM_TOKEN=your-telegram-bot-token
-   TLCR_TELEGRAM_CHAT_ID=your-default-chat-id
-   TLCR_TZ=Europe/Moscow
-   TLCR_DB_PATH=db/settings.db
-   TLCR_LOGPATH=log
-   TLCR_LOG_LEVEL=INFO
-   TLCR_FLASK_PORT=7000
-   ```
-
+актуальную версия примера `.env` файла нужно смотреть в соответствующем [репозитории](https://github.com/vsuh/reminder-tgm/blob/master/env/.env.SAMLPE).
+Убедитесь, что значение переменной TLCR_FLASK_PORT в `.env` файле и правая часть выражения [ports](https://github.com/vsuh/cron-tg-docker/blob/cb34851ef50964f790ef9e3d9264bd35c8960c0a/docker-compose.yml#L6) совпадают
+ 
 4. Создайте необходимые директории для базы данных и протоколов. В контейнере программы запускаются от имени пользователя `appuser(5678)`
    ```bash
    mkdir -p /opt/cron-reminder/{log,db}
