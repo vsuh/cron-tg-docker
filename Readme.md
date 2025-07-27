@@ -1,5 +1,5 @@
 # Telegram Reminder Bot в Docker
-![Build and Push Docker](https://github.com/vsuh/cron-tg-docker/actions/workflows/build-and-push.yml/badge.svg)
+[![Build and Push Docker](https://github.com/vsuh/cron-tg-docker/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/vsuh/cron-tg-docker/actions/workflows/build-and-push.yml)
 
 Это Docker-версия проекта [reminder-tgm](https://github.com/vsuh/reminder-tgm). Бот позволяет создавать и управлять напоминаниями через веб-интерфейс, отправляя уведомления в Telegram по расписанию.
 
