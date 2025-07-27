@@ -21,7 +21,7 @@ jobs:
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          sed -i "s/^ENV TAG=.*/ENV TAG=\"${{ github.event.client_payload.tag }}\"/" Dockerfile
+          sed -i '/^[[:space:]]*TAG=/s/TAG="[^"]*"/TAG="${{ github.event.client_payload.tag }}"/' Dockerfile
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add Dockerfile
