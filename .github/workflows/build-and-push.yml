@@ -8,6 +8,10 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+      - name: Check if release archive exists
+        run: |
+          curl -f -I "https://github.com/vsuh/reminder-tgm/archive/refs/tags/${{ github.event.client_payload.tag }}.tar.gz"
+
       - name: Checkout
         uses: actions/checkout@v3
 
