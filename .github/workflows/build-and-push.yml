@@ -26,9 +26,7 @@ jobs:
           git diff --cached --quiet || git commit -m "Update TAG to ${{ github.event.client_payload.tag }}"
           git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
           git push origin HEAD:${GITHUB_REF##*/}
-#          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
-#          git push origin HEAD:${GITHUB_REF##*/}
-          
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
