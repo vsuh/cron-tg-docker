@@ -10,7 +10,6 @@ ENV PYTHONUNBUFFERED=1 \
     TAG="v1.3.6"
 
 
-
 WORKDIR ${WORKDIR}
 
 #ADD --checksum=sha256:d8724a09c2f6d08bc1bcf072a05c9e45b87d43db940c3d90e6aefc4ed60525de https://github.com/vsuh/reminder-tgm/archive/refs/tags/v1.0.1.tar.gz ${TMPARC}
