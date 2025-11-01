@@ -46,39 +46,40 @@ jobs:
 #          tags: vsuh/cron-tg-docker:${{ github.event.client_payload.tag }}
 
 
-     - name: Build and push Docker image
-       uses: docker/build-push-action@v5
-       with:
-         context: .
-         push: true
-         tags: |
-           vsuh/cron-tg-docker:${{ github.event.client_payload.tag }}
-           vsuh/cron-tg-docker:latest
-         cache-from: type=gha
-         cache-to: type=gha,mode=max
-         platforms: linux/amd64,linux/arm64
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            vsuh/cron-tg-docker:${{ github.event.client_payload.tag }}
+            vsuh/cron-tg-docker:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
 
-     - name: Verify pushed images
-       run: |
-         echo "✅ Successfully built and pushed:"
-         echo "  - vsuh/cron-tg-docker:${{ github.event.client_payload.tag }}"
-         echo "  - vsuh/cron-tg-docker:latest"
+      - name: Verify pushed images
+        run: |
+          echo "✅ Successfully built and pushed:"
+          echo "  - vsuh/cron-tg-docker:${{ github.event.client_payload.tag }}"
+          echo "  - vsuh/cron-tg-docker:latest"
 
-     - name: Send Telegram notification
-       uses: appleboy/telegram-action@master
-       with:
-         to: ${{ secrets.TELEGRAM_CHAT_ID }}
-         token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-         message: |
-           ✅ Build successful!
-           
-           📦 Image: vsuh/cron-tg-docker
-           🏷️ Tags: ${{ github.event.client_payload.tag }}, latest
-           🔗 Repo: ${{ github.repository }}
-           🎯 Event: ${{ github.event_name }}
+      - name: Send Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ✅ Build successful!
+            
+            📦 Image: vsuh/cron-tg-docker
+            🏷 Tags: ${{ github.event.client_payload.tag }}, latest
+            🔗 Repo: ${{ github.repository }}
+            🎯 Event: ${{ github.event_name }}
 
       # (Опционально) Redeploy через Portainer API
       # - name: Redeploy stack in Portainer
       #   run: |
       #     curl -X POST "http://hl:9000/api/stacks/<STACK_ID>/redeploy?endpointId=<ENDPOINT_ID>" \
       #       -H "Authorization: Bearer ${{ secrets.PORTAINER_TOKEN }}"
+
