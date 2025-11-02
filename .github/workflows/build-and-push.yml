@@ -78,4 +78,3 @@ jobs:
             🎯 Event: ${{ github.event_name }}
             📝 Commit message:
             ${{ github.event.client_payload.message }}
-
