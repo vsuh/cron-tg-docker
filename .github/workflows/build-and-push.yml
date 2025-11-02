@@ -71,15 +71,11 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
             ✅ Build successful!
-            
+
             📦 Image: vsuh/cron-tg-docker
             🏷 Tags: ${{ github.event.client_payload.tag }}, latest
             🔗 Repo: ${{ github.repository }}
             🎯 Event: ${{ github.event_name }}
-
-      # (Опционально) Redeploy через Portainer API
-      # - name: Redeploy stack in Portainer
-      #   run: |
-      #     curl -X POST "http://hl:9000/api/stacks/<STACK_ID>/redeploy?endpointId=<ENDPOINT_ID>" \
-      #       -H "Authorization: Bearer ${{ secrets.PORTAINER_TOKEN }}"
+            📝 Commit message:
+            ${{ github.event.client_payload.message }}
 
