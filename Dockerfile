@@ -14,7 +14,7 @@ WORKDIR ${WORKDIR}
 
 #ADD --checksum=sha256:d8724a09c2f6d08bc1bcf072a05c9e45b87d43db940c3d90e6aefc4ed60525de https://github.com/vsuh/reminder-tgm/archive/refs/tags/v1.0.1.tar.gz ${TMPARC}
 ADD https://github.com/vsuh/reminder-tgm/archive/refs/tags/${TAG}.tar.gz ${TMPARC} 
-RUN tar xzf ${TMPARC} --strip-components=1 -C ${WORKDIR} && rm ${TMPARC}
+RUN tar xzf ${TMPARC} --strip-components=1 -C ${WORKDIR} && rm ${TMPARC} && echo "Succ. unpacked repo tag=${TAG}"
 
 RUN python3 -m venv venv && . ./venv/bin/activate 
 RUN pip install --root-user-action ignore -q --upgrade pip && pip install --root-user-action ignore -q -r requirements.txt
