@@ -4,6 +4,7 @@ name: Build and push Docker image on new reminder-tgm tag
 on:
   repository_dispatch:
     types: [new-reminder-tgm-tag]
+  workflow_dispatch:
 
 jobs:
   build-and-push:
