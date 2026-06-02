@@ -12,9 +12,10 @@ services:
       - /opt/cron-reminder/db:/workspaces/cron-tg-docker/db
     restart: unless-stopped
     build:
-        context: .
-        dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile
     labels:
       - "diun.enable=true"
       - "diun.watch_repo=false"
       - "diun.notify_on=new;update"
+      - "diun.hub.link=https://hub.docker.com/r/vsuh/cron-tg"
