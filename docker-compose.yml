@@ -13,3 +13,7 @@ services:
         context: .
         dockerfile: Dockerfile
     container_name: cron-tg
+    labels:
+      - "diun.enable=true"
+      - "diun.watch_repo=false"
+      - "diun.notify_on=new;update"
