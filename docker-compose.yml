@@ -1,5 +1,7 @@
 services:
   cron-tg:
+    image: docker.io/vsuh/cron-tg:latest
+    container_name: cron-tg
     ports:
       - "7878:7999"
     environment:
@@ -12,8 +14,7 @@ services:
     build:
         context: .
         dockerfile: Dockerfile
-    container_name: cron-tg
     labels:
       - "diun.enable=true"
-      - "diun.watch_repo=true"
+      - "diun.watch_repo=false"
       - "diun.notify_on=new;update"
