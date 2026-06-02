@@ -1,7 +1,7 @@
 ---
 services:
   cron-tg:
-    image: docker.io/vsuh/cron-tg:latest-dev
+    image: docker.io/vsuh/cron-tg:latest
     container_name: cron-tg
     ports:
       - "7878:7999"
