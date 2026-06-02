@@ -15,5 +15,5 @@ services:
     container_name: cron-tg
     labels:
       - "diun.enable=true"
-      - "diun.watch_repo=false"
+      - "diun.watch_repo=true"
       - "diun.notify_on=new;update"
