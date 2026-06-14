@@ -68,7 +68,9 @@ jobs:
             # ${{ github.event.client_payload.tag =~ /^v?([0-9]+\.[0-9]+)\.[0-9]+$/ && format('docker.io/vsuh/cron-tg:{0}', matches[0]) }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: linux/amd64,linux/arm64  # ← мульти-архитектура
+          platforms: linux/amd64,linux/arm64
+          provenance: false
+          sbom: false
 
       # 🔹 Верификация (опционально)
       - name: Verify pushed images
