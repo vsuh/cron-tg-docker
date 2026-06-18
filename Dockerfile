@@ -20,7 +20,7 @@ RUN apt-get update \
 ADD https://github.com/vsuh/reminder-tgm/archive/refs/tags/${TAG}.tar.gz ${TMPARC} 
 RUN tar xzf ${TMPARC} --strip-components=1 -C ${WORKDIR} && rm ${TMPARC} && echo "Succ. unpacked repo tag=${TAG}"
 
-RUN python3 -m venv venv && . ./venv/bin/activate 
+RUN python3 -m venv .venv && . ./.venv/bin/activate 
 RUN pip install --root-user-action ignore -q --upgrade pip && pip install --root-user-action ignore -q -r requirements.txt
 
 
