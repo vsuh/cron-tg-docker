@@ -17,6 +17,7 @@ services:
       dockerfile: Dockerfile
     labels:
       - "diun.enable=true"
-      - "diun.watch_repo=false"
+      - "diun.watch_repo=true"
+      - "diun.include_tags=^v[0-9]+\\.[0-9]+\\.[0-9]+$"
       - "diun.notify_on=new;update"
       - "diun.hub.link=https://hub.docker.com/repository/docker/vsuh/cron-tg/tags"
