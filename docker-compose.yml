@@ -12,9 +12,6 @@ services:
       - /opt/cron-reminder/log:/workspaces/cron-tg-docker/log
       - /opt/cron-reminder/db:/workspaces/cron-tg-docker/db
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile
     labels:
       - "diun.enable=true"
       - "diun.watch_repo=true"
