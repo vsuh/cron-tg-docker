@@ -15,37 +15,15 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # для push изменений в репо
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true  # ← важно для последующего git push
 
       # 🔹 Опционально: проверить, что архив с исходниками существует
       - name: Check if release archive exists
         run: |
           curl -f -I "https://github.com/vsuh/reminder-tgm/archive/refs/tags/${{ github.event.client_payload.tag || github.event.inputs.tag }}.tar.gz"
-
-      # 🔹 Обновляем TAG в Dockerfile и коммитим (для истории)
-      - name: Update TAG in Dockerfile
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          sed -i '/^[[:space:]]*TAG=/s/TAG="[^"]*"/TAG="${{ github.event.client_payload.tag || github.event.inputs.tag }}"/' Dockerfile
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Dockerfile
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: update TAG to ${{ github.event.client_payload.tag || github.event.inputs.tag }}"
-            git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}
-            git push origin HEAD:${GITHUB_REF##*/}
-          else
-            echo "No changes to commit"
-          fi
 
       # 🔹 Настройка Docker Buildx
       - name: Set up Docker Buildx
@@ -58,13 +36,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 🔹 Сборка и пуш образа
+      # 🔹 Сборка и пуш образа (версия reminder-tgm передаётся как build-arg,
+      #     Dockerfile в репозитории не редактируется и не коммитится)
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            TAG=${{ github.event.client_payload.tag || github.event.inputs.tag }}
           tags: |
             docker.io/vsuh/cron-tg:${{ github.event.client_payload.tag || github.event.inputs.tag }}
             docker.io/vsuh/cron-tg:latest
@@ -97,4 +78,3 @@ jobs:
             🎯 Source tag: ${{ github.event.client_payload.tag }}
             📝 Commit message:
             ${{ github.event.client_payload.message }}
-
