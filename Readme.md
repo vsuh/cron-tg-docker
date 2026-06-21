@@ -213,12 +213,3 @@ docker compose up -d
 
 Этот проект является Docker-обёрткой для [reminder-tgm](https://github.com/vsuh/reminder-tgm) и распространяется под той же лицензией ([BSD-3-Clause](https://github.com/vsuh/reminder-tgm/blob/master/LICENSE)).
 
-### Примечание для мейнтейнера
-
-Чтобы получить хеш для проверки целостности скачиваемого архива релиза, на странице [Releases](https://github.com/vsuh/reminder-tgm/releases) репозитория `reminder-tgm` создайте очередной релиз, а затем вычислите хеш по ссылке на `tar.gz`:
-
-```bash
-curl -sL https://github.com/vsuh/reminder-tgm/archive/refs/tags/v1.0.1.tar.gz | sha256sum
-```
-
-Полученное значение можно использовать в `Dockerfile` для директивы `ADD --checksum=sha256:...`.

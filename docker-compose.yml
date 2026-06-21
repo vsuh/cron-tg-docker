@@ -11,6 +11,7 @@ services:
       - /opt/cron-reminder/env/.env.prod:/workspaces/cron-tg-docker/.env
       - /opt/cron-reminder/log:/workspaces/cron-tg-docker/log
       - /opt/cron-reminder/db:/workspaces/cron-tg-docker/db
+      - /opt/cron-reminder/keys:/keys:ro
     restart: unless-stopped
     labels:
       - "diun.enable=true"
