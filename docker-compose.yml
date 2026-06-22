@@ -7,6 +7,7 @@ services:
       - "7878:7999"
     environment:
       - UUID=appuser
+      - TZ=Europe/Moscow
     volumes:
       - /opt/cron-reminder/env/.env.prod:/workspaces/cron-tg-docker/.env
       - /opt/cron-reminder/log:/workspaces/cron-tg-docker/log
